@@ -1,6 +1,7 @@
 package com.example.demo.Services;
 
 import io.jsonwebtoken.Jwts;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,7 @@ public class JwtService {
 
     private final String jwtSecret = "mySecretKey";
     private final long expirationMs = 86400000;
+
 
     public String generateToken(String username) {
         return Jwts.builder()

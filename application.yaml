@@ -8,3 +8,6 @@ spring:
       ddl-auto: create
 
 
+  main:
+    allow-circular-references: true
+
