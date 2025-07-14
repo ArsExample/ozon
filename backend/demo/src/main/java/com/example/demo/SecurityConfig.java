@@ -30,10 +30,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->auth.requestMatchers("/","/add-user","/login","/css/**","/register","/")
                         .permitAll()
                         .anyRequest()
                         .authenticated())
+
                 .formLogin((form) -> form.loginPage("/login").defaultSuccessUrl("/").permitAll())
 
                         .build();
