@@ -37,7 +37,7 @@ function Header() {
             event.stopPropagation();
         } else {
             console.log(email, password, rememberMe);
-            const {response} = await axios.post("http://localhost:8080/login", params);
+            const {response} = await axios.post("http://localhost:8080/login", data);
             console.log("response:", response);
         }
 
