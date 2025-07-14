@@ -7,12 +7,17 @@ import Button from 'react-bootstrap/Button';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Form from 'react-bootstrap/Form';
+
+import axios from "axios"
+
 import { useState } from 'react';
 
 
 import '../styles/Header.css'
 
 function Header() {
+    var data ={}
+
     const [show, setShow] = useState(false);
     const [validated, setValidated] = useState(false);
     // мне похуй мегакостыль (а может нет)
@@ -23,14 +28,17 @@ function Header() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const handleLoginSubmit = (event) => {
+    const handleLoginSubmit = async (event) => {
+
         event.preventDefault();
         const form = event.currentTarget;
-
+        data = {login: email, password: password}
         if (form.checkValidity() === false) {
             event.stopPropagation();
         } else {
             console.log(email, password, rememberMe);
+            const {response} = await axios.post("http://localhost:8080/login", params);
+            console.log("response:", response);
         }
 
         setValidated(true); // ?? (это из документации я хз)

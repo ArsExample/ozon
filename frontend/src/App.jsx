@@ -1,12 +1,16 @@
 import Button from 'react-bootstrap/Button';
+
 import Header from "./components/Header"
+import MainPage from './pages/MainPage';
+
+import "./styles/App.css"
 
 function App() {
 
   return (
     <>
       <Header></Header>
-      {/* <RegistrationModal/> */}
+      <MainPage/>
     </>
   )
 }
