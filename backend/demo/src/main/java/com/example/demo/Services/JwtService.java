@@ -1,7 +1,7 @@
 package com.example.demo.Services;
 
-import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Jwts;
+import org.springframework.stereotype.Component;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -16,28 +16,16 @@ import java.util.Map;
 @Component
 public class JwtService {
 
+    private final String jwtSecret = "mySecretKey";
+    private final long expirationMs = 86400000;
 
-
-
-        @Value("${jwt.secret}")
-        private String jwtSecret;
-
-        @Value("${jwt.expiration}")
-        private int jwtExpirationInMs;
-
-        public String generateToken(String username) {
-            Date now = new Date();
-            Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
-
-            Map<String, Object> claims = new HashMap<>();
-            claims.put("username", username);
-
-            return Jwts.builder()
-                    .setClaims(claims)
-                    .setIssuedAt(now)
-                    .setExpiration(expiryDate)
-                    .signWith(SignatureAlgorithm.HS512, jwtSecret)
-                    .compact();
-        }
+    public String generateToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
+                .signWith(SignatureAlgorithm.HS256, jwtSecret)
+                .compact();
     }
+}
 
