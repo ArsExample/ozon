@@ -54,6 +54,11 @@ public class AuthController {
         return token;
 
     }
+    
+    @RequestMapping("/")
+    public String welcome(){
+        return "Здарова педики";
+    }
 
 
     private PasswordEncoder passwordEncoder;
